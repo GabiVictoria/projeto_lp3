@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from validate_docbr import CPF, CNPJ
 
 app = Flask("Minha App") # nome da minha aplicação/projeto - pode ser qualquer coisa
@@ -9,17 +9,22 @@ cnpj = CNPJ()
 # /home page - página inicial
 @app.route("/")
 def home():
-    return "<h1>Home Page<h1>"
+    return render_template("home.html")
 
 # /contato - página de contato
 @app.route("/contato")
 def cont():
-    return "<h1>Contato<h1>"
+    return render_template("contato.html")
 
 # /produtos - página de produtos
 @app.route("/produtos")
-def prods():
-    return "<h1>Produtos<h1>"
+def produtos():
+    lista_produtos = [
+        {"nome": "Coca-Cola", "descricao":"Mata a sede"},
+        {"nome": "Doritos", "descricao":"Suja a mão"},
+        {"nome": "Chocolate", "descricao":"Bom"}
+    ]
+    return render_template("produtos.html", produtos=lista_produtos)
 
 # /produtos - página de produtos
 @app.route("/servicos")
